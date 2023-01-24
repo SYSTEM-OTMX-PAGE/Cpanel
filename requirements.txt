@@ -1,0 +1,7 @@
+flask
+jinja2
+certifi
+justify
+pymongo
+pymongo[srv]
+werkzeug
