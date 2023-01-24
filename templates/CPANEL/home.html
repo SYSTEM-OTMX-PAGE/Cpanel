@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
+{% include 'CPANEL/modulos/header.html' %}
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
+                alt="LOGO" height="60" width="60" />
+            <p>SYSTEM PANEL</p>
+        </div>
+        <!-- Navbar -->
+        {% include 'CPANEL/modulos/nav-bar.html' %}
+        <!-- /.navbar -->
+        {% include 'CPANEL/modulos/menu.html' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="container-fluid mt-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">ADMINISTRADORES DE BASE DE DATOS</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="text-center">
+                                <a class="fas fa-solid fa-leaf" href="/BASE-DATOS"></a>
+                                <p>MONGO BD</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+
+        <!-- /.content-wrapper -->
+        {% include 'CPANEL/modulos/footer.html' %}
+        {% include 'CPANEL/modulos/side-bar-control.html' %}
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    {% include 'CPANEL/modulos/scripts.html' %}
+    <!--Libreria chart-->
+    <script src="{{ url_for('static',filename='dist/js/Reloj/reloj.js')}}"></script>
+</body>
+
+</html>

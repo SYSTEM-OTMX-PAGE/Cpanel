@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
+{% include 'BD/modulos/header.html' %}
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
+                alt="LOGO" height="60" width="60" />
+            <p>SYSTEM PANEL</p>
+        </div>
+        <!-- Navbar -->
+        {% include 'BD/modulos/nav-bar.html' %}
+        <!-- /.navbar -->
+        {% include 'BD/modulos/menu.html' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="container-fluid mt-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">BASES DE DATOS EN MONGODB</h3>
+                    </div>
+                    <div class="card-body">
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre de la BD</th>
+                                            <th>Propiedades</th>
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td>{{menu}}</td>
+                                            <td class="text-center"><a href="#" class="btn btn-info"> <i class="fas fa-solid fa-info nav-icon"></i></a></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+
+        <!-- /.content-wrapper -->
+        {% include 'BD/modulos/footer.html' %}
+        {% include 'BD/modulos/side-bar-control.html' %}
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    {% include 'BD/modulos/scripts.html' %}
+    <!--Libreria chart-->
+    <script src="{{ url_for('static',filename='dist/js/Reloj/reloj.js')}}"></script>
+</body>
+
+</html>
