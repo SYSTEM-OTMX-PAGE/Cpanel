@@ -1,5 +1,30 @@
-from flask import render_template, session, flash, request, redirect
+from database import database as mongoDB
+from flask import flash, redirect, session
 
-def IniciarSesion():
-    titulo = 'Login Cpanel'
-    return render_template('/index.html', titulo=titulo)
+def DataBase(tabla):
+    BD = mongoDB.ConexionMongo()
+    datos = BD[tabla]
+    return datos
+
+def login(request):
+    if request.method == 'POST':
+        try:
+            datos = DataBase("admin")
+            usuario = datos.find_one({'email':request.form['email']})
+            if(usuario is None):
+                flash("NO EXISTE EL USUARIO")
+                return redirect('/')
+
+            else:
+                if(usuario["password"] == request.form['password']):
+                    session["USER"] = usuario["email"]
+                    session["ROL"] = "administrador"
+                    flash("BIENVENIDO: "+session["USER"])
+                    return redirect('/CPANEL')
+                else:
+                    flash("ERROR EN LA CONTRASEÑA")
+                    return redirect('/')    
+
+        except Exception as e:
+            flash("ERROR EN EL SERVIDOR: " +str(e))
+            return redirect('/')

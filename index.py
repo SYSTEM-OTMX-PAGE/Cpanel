@@ -1,30 +1,40 @@
-from flask import Flask
-import funciones.Cpanel.funciones_Cpanel as Panel
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import funciones.Login.funciones_login as Login
-import funciones.BaseDatos.funciones_BD as DataBase
 import os
 
 app = Flask(__name__)
 app.host = '0.0.0.0'
 app.port = os.getenv('PORT')
+app.secret_key = b'\xd4\x8a\xa7\x9f\xf39i\x17|>\xad\xa6R]\xc0W\xc8\xa3M\x852\xa34>'
 
+#FUNCIONES DEL HOME CPANEL
+#***HOMEPAGE***
+@app.route('/CPANEL')
+def homepage():
+    if session["ROL"] == "administrador":
+        return render_template('CPANEL/home.html', titulo ="Bienvenido: " +str(session["USER"]))
+    else:
+        flash("POR FAVOR INICIA SESION")
+        return redirect(url_for('sign_in'))  
 
-#FUNCION HOMEPAGE
-@app.route('/HOME')
-def homePage():
-    return Panel.home() 
+#FUNCIONES PARA LOGIN
 
-#FUNCIONES DE BD
-@app.route('/BASE-DATOS')
-def BaseDatos():
-    return DataBase.BD()
-
-#FUNCIONES DE LOGIN
+#***FUNCION DE RUTA PRINCIPAL***
 @app.route('/')
-@app.route('/INICIAR-SESION')
-def iniciarSesion():
-    return Login.IniciarSesion()         
+def index():
+    return redirect(url_for('sign_in'))
 
+#***FUNCION PARA MANDAR Y RECIBIR DATOS DE LOGIN***
+@app.route('/login', methods = ['GET','POST'])
+def sign_in():
+    if request.method == 'POST':
+        return Login.login(request)
+    elif request.method == 'GET':
+        return render_template('LOGIN/index.html', titulo = "INICIAR SESION")    
+
+  
+
+           
 
 #ENDPOINT
 
