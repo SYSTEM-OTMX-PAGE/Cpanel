@@ -19,7 +19,9 @@ def ConsultaGeneral():
     try:
         client = MongoClient(MONGO_URL,tlsCAfile=ca)
         bases = client
-        bases.list_database_names()
+        
     except ConnectionError:
-        print("ERROR EN LA BASE DE DATOS")         
+        print("ERROR EN LA BASE DE DATOS")  
+
+    return bases           
  
