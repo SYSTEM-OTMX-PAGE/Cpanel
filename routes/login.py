@@ -18,10 +18,22 @@ def sign_in():
         return render_template('LOGIN/index.html', titulo = "INICIAR SESION")   
 
 #***HOMEPAGE***
-@login_routes.get('/CPANEL')
+@login_routes.get('/cpanel')
 def homepage():
-    if session["ROL"] == "administrador":
-        return render_template('CPANEL/home.html', titulo ="Bienvenido: " +str(session["USER"]))
-    else:
-        flash("POR FAVOR INICIA SESION")
-        return redirect('/login')          
+    try:
+        if "administrador" in session["ROL"] :
+            return render_template('CPANEL/home.html', titulo ="Bienvenido: " +str(session["USER"]))
+        else:
+            flash("POR FAVOR INICIA SESION")
+            return redirect('/login')
+    except Exception as e:
+        flash("ERROR EN EL SERVIDOR: "+str(e))
+        return redirect('/login')
+                        
+@login_routes.get('/cerrar-sesion')
+def close_session():
+    session.pop('ROL', None)
+    session.pop('USER', None)
+    flash("SESION FINALIZADA")
+    return redirect('/login')
+         
