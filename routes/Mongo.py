@@ -16,6 +16,19 @@ def MongoBD():
         flash("ERROR EN EL SERVIDOR: "+str(e))
         return redirect('/login')            
 
+@Mongo_routes.route('/bases_colecciones/<key>')
+def colecctions_bd(key):
+    try:
+        if "administrador" in session["ROL"]:
+            return RouteBD.bdcolecctions(key)
+        else:
+            flash("POR FAVOR INICIA SESION")
+            return redirect('/login')
+    except Exception as e:
+        flash("ERROR EN EL SERVIDOR: "+str(e))
+        return redirect('/login')               
+             
+
 @Mongo_routes.get('/cerrar-sesion')
 def close_session():
     session.pop('ROL', None)

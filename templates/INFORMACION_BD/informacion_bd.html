@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
-{% include 'BD/modulos/header.html' %}
+{% include 'INFORMACION_BD/modulos/header.html' %}
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -11,9 +11,9 @@
             <p>SYSTEM PANEL</p>
         </div>
         <!-- Navbar -->
-        {% include 'BD/modulos/nav-bar.html' %}
+        {% include 'INFORMACION_BD/modulos/nav-bar.html' %}
         <!-- /.navbar -->
-        {% include 'BD/modulos/menu.html' %}
+        {% include 'INFORMACION_BD/modulos/menu.html' %}
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="container-fluid mt-4">
@@ -28,14 +28,15 @@
                                         <tr>
                                             <th>Nombre de la BD</th>
                                             <th>Propiedades</th>
-                                            
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center"><a href="#" class="btn btn-info"> <i class="fas fa-solid fa-info nav-icon"></i></a></td>    
+                                            {% for dato in consulta %}
+                                        <tr>    
+                                            <td>{{dato}}</td>
+                                            <td class="text-center"><a href="#" class="btn btn-info"> <i class="fas fa-solid fa-info nav-icon"></i></a></td>
+                                            {% endfor %}   
+                                        </tr>     
                                     </tbody>
                                 </table>
                             </div>
@@ -45,12 +46,12 @@
             </div>
         </div>
         <!-- /.content-wrapper -->
-        {% include 'BD/modulos/footer.html' %}
-        {% include 'BD/modulos/side-bar-control.html' %}
+        {% include 'INFORMACION_BD/modulos/footer.html' %}
+        {% include 'INFORMACION_BD/modulos/side-bar-control.html' %}
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    {% include 'BD/modulos/scripts.html' %}
+    {% include 'INFORMACION_BD/modulos/scripts.html' %}
     <!--Libreria chart-->
 </body>
 
