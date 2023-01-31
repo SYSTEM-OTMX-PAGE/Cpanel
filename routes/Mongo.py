@@ -26,7 +26,19 @@ def colecctions_bd(key):
             return redirect('/login')
     except Exception as e:
         flash("ERROR EN EL SERVIDOR: "+str(e))
-        return redirect('/login')               
+        return redirect('/login')      
+
+@Mongo_routes.route('/informacion_coleccion/<key>')
+def informacion_coleccion(key):
+    try:
+        if "administrador" in session["ROL"]:
+            return RouteBD.collectionsInfo(key)
+        else:
+            flash("POR FAVOR INICIA SESION")
+            return redirect('/login')
+    except Exception as e:
+        flash("ERROR EN EL SERVIDOR: "+str(e))
+        return redirect('/login')                             
              
 
 @Mongo_routes.get('/cerrar-sesion')

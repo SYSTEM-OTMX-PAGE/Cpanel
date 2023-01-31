@@ -20,8 +20,11 @@ def bdcolecctions(key):
         consulta = mongoDB.consulta_colecciones(key).list_collection_names()
         bd_menu = BD.list_database_names()
         return render_template('INFORMACION_BD/informacion_bd.html',consulta=consulta, bd_menu=bd_menu)
-        
 
+def collectionsInfo(key):
+    info = mongoDB.informacion_colecciones(key)
+    coleccionInfo = info[key].find()
+    return coleccionInfo
 
         
               

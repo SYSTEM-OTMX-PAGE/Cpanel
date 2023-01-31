@@ -16,8 +16,7 @@ def ConexionMongo():
     return base_datos       
 
 def consulta_colecciones(key):
-    try:
-        
+    try:    
         cliente = MongoClient(MONGO_URL,tlsCAfile=ca)
         base = cliente[key]
         return base   
@@ -25,7 +24,13 @@ def consulta_colecciones(key):
     except ConnectionError:
         print("ERROR EN LA BASE DE DATOS")
     
-    
+def informacion_colecciones(key):
+    try:
+        client = MongoClient(MONGO_URL,tlsCAfile=ca)
+        base = client[key]
+        return base
+    except ConnectionError:
+        print("ERROR EN LA BASE DE DATOS")    
 
 
 def ConsultaGeneral():#poner nombres mas especificos pero faciles y correspondientes a este archivo ejemplo, consulta_database() y respetas los mismo para todos ls nobre
