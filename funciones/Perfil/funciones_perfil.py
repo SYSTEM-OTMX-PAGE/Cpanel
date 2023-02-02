@@ -1,22 +1,23 @@
 from database import database as mongoDB
 from flask import Flask, render_template, session, redirect, flash,request
 
-def DataBase(tabla):
-    BD = mongoDB.ConexionMongo()
-    datos = BD[tabla]
-    return datos
+BD = mongoDB.ConexionMongo()
 
 def perfil():
     if session["ROL"] == "administrador":
         titulo ="Informacion "+str(session["USER"])
-        return render_template('PERFIL/perfil.html',titulo=titulo)
+        Administradores = BD['admin']
+        Admin = Administradores.find_one({'email':session["USER"]})#REVISAR PORQUE NO OBTIENE EL CAMPO EMAIL (MUESTRA TODO LO QUE TIENE USER)
+        print(Admin)
+        return render_template('PERFIL/perfil.html', titulo=titulo, admin=Admin)
 
 #CHECAR ESTO xd
-def actualizarPerfil(request):
-    if request.method == "POST" :
-        try:
-            datos = DataBase("admin")
-            password = datos.update_one({'password': request.form['password']})    
-            print(password)
-        except Exception as e:
-            print("ERROR AL ACTUALIZAR PASSWORD: "+str(e))
+def actualizarPassword(key,campo):
+    if session ["ROL"] == "administrador":
+        Administradores = BD["admin"]
+        dato = request.form["password"]
+        if dato:
+            print(dato)
+            Administradores.update_one({'correo':key}, {'$set':{campo:dato}}) 
+        return perfil()                   
+    

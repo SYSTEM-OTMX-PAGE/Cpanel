@@ -29,14 +29,12 @@
                         <p class="text-muted text-center">Administrador</p>
                         <div class="card card-info card-outline">
                             <div class="card-body">
-                                <!-- /.tab-pane -->
-                                <div class="tab-pane" id="settings">
                                     <div class="row">
                                         <h4 class="title-h4">Cambiar Contraseña</h4>
                                         <div class="form-group"></div>
                                     </div>
                                     <form class="row"
-                                        action=""
+                                        action="{{url_for('Perfil_routes.UpdatePassword',key=admin.email, campo='password')}}"
                                         method="post">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -61,8 +59,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="tab-pane" id="ayuda">
+                                
                                     <div class="row">
                                         <h4 class="title-h4">Sistema de apoyo al establecimiento</h4>
                                         <div class="form-group"></div>
@@ -111,8 +108,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                                <!-- /.tab-pane -->
+                                
                             </div>
                         </div>
                     </div>
