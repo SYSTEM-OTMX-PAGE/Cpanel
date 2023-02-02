@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template,session,flash,redirect
+from flask import Blueprint, render_template,session,flash,redirect, request
 import funciones.Perfil.funciones_perfil as RoutePerfil
 
 Perfil_routes = Blueprint("Perfil_routes",__name__)
@@ -14,4 +14,8 @@ def informacion_perfil():
     except Exception as e:
         flash("ERROR EN EL SERVIDOR: "+str(e))
         return redirect('/login')            
-   
+
+@Perfil_routes.route('/actualizar-password',methods=['POST'])
+def password():
+    if request.method == 'POST':
+        return RoutePerfil.actualizarPerfil(request) and redirect('/informacion-perfil')
