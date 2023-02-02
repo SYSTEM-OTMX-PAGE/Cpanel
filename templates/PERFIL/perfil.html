@@ -6,9 +6,9 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}" alt="LOGO"
-              height="60" width="60" />
-          </div>
+            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
+                alt="LOGO" height="60" width="60" />
+        </div>
         <!-- Navbar -->
         {% include 'CPANEL/modulos/nav-bar.html' %}
         <!-- /.navbar -->
@@ -29,58 +29,103 @@
                         <p class="text-muted text-center">Administrador</p>
                         <div class="card card-info card-outline">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <small>
-                                                Contraseña:
-                                                <button type="button" data-toggle="modal" data-target="#contraseña"
-                                                    class="btn btn-xs btn-link btnOpenEdit"><i
-                                                        class="fa-solid fas fa-pen"></i>
-                                                    Editar</button>
-                                            </small>
-                                            <p>
-                                            <input type="password" value="1234567890" class="form-control-sm rounded-pill" disabled>
-                                            </p>
-                                        </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="settings">
+                                    <div class="row">
+                                        <h4 class="title-h4">Cambiar Contraseña</h4>
+                                        <div class="form-group"></div>
                                     </div>
+                                    <form class="row"
+                                        action=""
+                                        method="post">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Nueva Contraseña</label>
+                                                <input type="password" name="password" class="form-control"
+                                                    placeholder="Contraseña">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Confirmar Contraseña</label>
+                                                <input type="password" name="confirmacion" class="form-control"
+                                                    placeholder="Contraseña">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group text-center">
+                                                <label for="" class="label">
+                                                    <li class="fas fa-solid text-center fa-exclamation"></li>
+                                                </label><br>
+                                                <button type="submit" class="btn btn-md btn-success">CONFIRMAR</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
+                                <div class="tab-pane" id="ayuda">
+                                    <div class="row">
+                                        <h4 class="title-h4">Sistema de apoyo al establecimiento</h4>
+                                        <div class="form-group"></div>
+                                    </div>
+                                    <form class="row">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="" class="label">Asunto</label>
+                                                        <input type="text" name="asunto" class="form-control"
+                                                            placeholder="Asunto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Detalle del Problema</label>
+                                                        <textarea class="form-control" name="detalles" rows="4"
+                                                            placeholder="Detalles....."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <button class="btn btn-md btn-success">ENVIAR</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="alert alert-warning shadow"  role=" alert">
+
+                                                <h4 class="alert-heading">
+                                                    <li class="fas fa-solid fa-user"></li> ¡Sistema de Ayuda!
+                                                </h4>
+                                                <p>¡Hola! Muchas gracias por usar SYSTEM-PANEL by <strong> SYSTEM-OTMX </strong></p>
+                                                <p>Si tienes algun problema con el sistema.</p>
+                                                <p>Por favor envianos un mensaje con el asunto y detalles del problema.
+                                                    Nos comunicaremos
+                                                    los mas pronto posible
+                                                </p>
+                                                <hr>
+                                                <p class="mb-0">Si no hay respuesta envia un mensaje al siguiente
+                                                    correo: <samp>system.otmx@gmail.com</samp>.</p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.tab-pane -->
                             </div>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
-            </section>
+                <!-- /.card-body -->
         </div>
+        <!-- /.card -->
+        </section>
+    </div>
 
-        <!--Modales-->
-        <div class="modal fade" id="contraseña">
-            <div class="modal-dialog modal-md">
-                <form class="modal-content" action="/actualizar-password" method="post">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modificar Contraseña</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" value="" class="form-control rounded-pill" name="password">
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default rounded-pill"
-                            data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary rounded-pill">Guardar</button>
-                    </div>
-                </form>
-                <!-- /.modal-content -->
-            </div>
-        </div>
-
-
-        <!-- /.content-wrapper -->
-        {% include 'CPANEL/modulos/footer.html' %}
-        {% include 'CPANEL/modulos/side-bar-control.html' %}
+    <!-- /.content-wrapper -->
+    {% include 'CPANEL/modulos/footer.html' %}
+    {% include 'CPANEL/modulos/side-bar-control.html' %}
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
