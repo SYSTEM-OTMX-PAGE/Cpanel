@@ -1,131 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}">
-{% include 'CPANEL/modulos/header.html' %}
+{% include 'PERFIL/modulos/header.html' %}
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
                 alt="LOGO" height="60" width="60" />
+            <p>SYSTEM PANEL</p>
         </div>
         <!-- Navbar -->
-        {% include 'CPANEL/modulos/nav-bar.html' %}
+        {% include 'PERFIL/modulos/nav-bar.html' %}
         <!-- /.navbar -->
-        {% include 'CPANEL/modulos/menu.html' %}
+        {% include 'PERFIL/modulos/menu.html' %}
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Profile Image -->
-            <section class="container mt-4">
+            <section class="container-fluid mt-4">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
                                 src="{{ url_for('static', filename = 'dist/img/menu_icons/SYSTEM_menu.png') }}"
-                                alt="User profile picture">
+                                alt="user profile image">
+                            <h3 class="profile-username text-center"></h3>
+                            <p class="text-center">{{session['USER']}}</p>
+                            <p class="text-center">administrador</p>
                         </div>
-                        <h3 class="profile-username text-center"></h3>
-                        <p class="text-center">{{session['USER']}}</p>
-                        <p class="text-muted text-center">Administrador</p>
                         <div class="card card-info card-outline">
                             <div class="card-body">
-                                    <div class="row">
-                                        <h4 class="title-h4">Cambiar Contraseña</h4>
-                                        <div class="form-group"></div>
+                                <div class="row">
+                                    <h4 class="title-h4">Cambiar contraseña</h4>
+                                    <div class="form-group"></div>
+                                </div>
+                                <!--formulario del cambio de contraseña-->
+                                <form class="row"
+                                    action="{{url_for('Perfil_routes.UpdatePassword',key=admin.email, campo='password')}}"
+                                    method="post">
+                                    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+                                        message in messages %}
+                                        <script>
+                                          Swal.fire({
+                                            position: "top-end",
+                                            icon: "warning",
+                                            title: "{{message}}",
+                                            showConfirmButton: false,
+                                            timer: 4000,
+                                          });
+                                        </script>
+                                        {% endfor %} {% endif %} {% endwith %}
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                           <label>Nueva contraseña</label>
+                                           <input type="password" name="password" class="form-control" placeholder="Contraseña"> 
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label class="label">
+                                                <i class="fas fa-solid text-center fa-exclamation"></i>
+                                            </label><br>
+                                            <button type="submit" class="btn btn-success">Confirmar</button>
+                                        </div>
+                                    </div>   
+                                </form>
+                                <div class="row">
+                                    <h4 class="title-h4">Sistema de ayuda al administrador</h4>
+                                </div>
+                                <!--formulario de problemas del panel-->
+                                <form class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label">Asunto</label>
+                                                    <input type="text" name="asunto" class="form-control" placeholder="Asunto">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label">Detalles del problema</label>
+                                                    <textarea class="form-control" name="detalles" rows="4" placeholder="Detalle aquí su problema"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <form class="row"
-                                        action="{{url_for('Perfil_routes.UpdatePassword',key=admin.email, campo='password')}}"
-                                        method="post">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">Nueva Contraseña</label>
-                                                <input type="password" name="password" class="form-control"
-                                                    placeholder="Contraseña">
-                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="alert alert-warning shadow" role="alert">
+                                            <h3 class="alert-heading">
+                                                <i class="fas fa-solid fa-user">¡Sistema de ayuda al administrador!</i>
+                                            </h3>
+                                            <p>Hola muchas gracias por usar SYSTEM-PANEL by <strong>SYSTEM-OTMX</strong>;
+                                            Si presentas algun problema con el sistema, por favor envia un mensaje con el asunto y detalles del problema.
+                                            Trata de ser lo mas especifico posible por favor.
+                                            </p>
+                                            <hr>
+                                            <p>En caso de que no recibas respuesta por favor manda un correo a: system.otmx@gmail.com</p>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">Confirmar Contraseña</label>
-                                                <input type="password" name="confirmacion" class="form-control"
-                                                    placeholder="Contraseña">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group text-center">
-                                                <label for="" class="label">
-                                                    <li class="fas fa-solid text-center fa-exclamation"></li>
-                                                </label><br>
-                                                <button type="submit" class="btn btn-md btn-success">CONFIRMAR</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                
-                                    <div class="row">
-                                        <h4 class="title-h4">Sistema de apoyo al establecimiento</h4>
-                                        <div class="form-group"></div>
-                                    </div>
-                                    <form class="row">
-                                        <div class="col-md-8">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="" class="label">Asunto</label>
-                                                        <input type="text" name="asunto" class="form-control"
-                                                            placeholder="Asunto">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Detalle del Problema</label>
-                                                        <textarea class="form-control" name="detalles" rows="4"
-                                                            placeholder="Detalles....."></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 text-center">
-                                                    <button class="btn btn-md btn-success">ENVIAR</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="alert alert-warning shadow"  role=" alert">
-
-                                                <h4 class="alert-heading">
-                                                    <li class="fas fa-solid fa-user"></li> ¡Sistema de Ayuda!
-                                                </h4>
-                                                <p>¡Hola! Muchas gracias por usar SYSTEM-PANEL by <strong> SYSTEM-OTMX </strong></p>
-                                                <p>Si tienes algun problema con el sistema.</p>
-                                                <p>Por favor envianos un mensaje con el asunto y detalles del problema.
-                                                    Nos comunicaremos
-                                                    los mas pronto posible
-                                                </p>
-                                                <hr>
-                                                <p class="mb-0">Si no hay respuesta envia un mensaje al siguiente
-                                                    correo: <samp>system.otmx@gmail.com</samp>.</p>
-                                            </div>
-                                        </div>
-                                    </form>
-                                
+                                    </div> 
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
+            </section>
         </div>
-        <!-- /.card -->
-        </section>
-    </div>
 
-    <!-- /.content-wrapper -->
-    {% include 'CPANEL/modulos/footer.html' %}
-    {% include 'CPANEL/modulos/side-bar-control.html' %}
+        <!-- /.content-wrapper -->
+        {% include 'PERFIL/modulos/footer.html' %}
+        {% include 'PERFIL/modulos/side-bar-control.html' %}
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    {% include 'CPANEL/modulos/scripts.html' %}
+    {% include 'PERFIL/modulos/scripts.html' %}
+    <!--Libreria chart-->
 </body>
 
 </html>
