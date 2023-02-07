@@ -21,11 +21,11 @@ def bdColecctions(key):
         flash("POR FAVOR INICIA SESION")
         return redirect('/login')
 
-#REVISAR ESTO PORQUE UN NO FUNCIONA :C
 def CollectionsInfo(key):
-   documentos = mongoDB.DocumentosColecciones(key)
-  
-   return key
+    if session["ROL"] == "administrador":
+        
+        return key
+        
     
 
     

@@ -1,5 +1,6 @@
 from database import database as mongoDB
 from flask import Flask, render_template, session, redirect, flash,request
+from werkzeug.security import generate_password_hash
 
 BD = mongoDB.ConexionMongo()
 
@@ -17,6 +18,7 @@ def actualizarPassword(key,campo):
             Administradores = BD['admin']
             dato = request.form['password']
             if dato:
+                dato = generate_password_hash(dato, method='sha256')
                 Administradores.update_one({'email':key}, {'$set':{campo:dato}}) 
                 flash("CONTRASEÑA ACTUALIZADA CORRECTAMENTE")
                 return perfil()

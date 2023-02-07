@@ -1,5 +1,6 @@
 from database import database as mongoDB
 from flask import flash, redirect, session
+from werkzeug.security import check_password_hash
 
 def DataBase(tabla):
     BD = mongoDB.ConexionMongo()
@@ -15,12 +16,12 @@ def login(request):
                 flash("NO EXISTE EL USUARIO")   
                 return redirect('/')
             else:
-                if(usuario["password"] == request.form['password']):
+                if(check_password_hash(usuario["password"],request.form["password"]) == True):
                     session["USER"] = usuario["email"]
                     session["ROL"] = "administrador"
                     flash("BIENVENIDO: "+session["USER"])
                     return redirect('/cpanel')      
-                else:
+                elif(check_password_hash(usuario["password"],request.form["password"]) == False):
                     flash("ERROR EN LA CONTRASEÑA")
                     return redirect('/')    
         except Exception as e:
