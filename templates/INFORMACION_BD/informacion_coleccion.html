@@ -19,23 +19,23 @@
             <div class="container-fluid mt-4">
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">BASES DE DATOS EN {{nameDataBase}}</h3>
+                        <h3 class="card-title">DOCUMENTOS DE LA COLECCION</h3>
                     </div>
                     <div class="card-body">
                             <div class="card-body">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Nombre de la BD</th>
-                                            <th>Propiedades</th>
+                                            <th>Documento</th>
+                                            <th>CRUD</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            {% for dato in consulta %}
-                                        <tr>    
+                                        {%for dato in consulta %}   
+                                        <tr>
                                             <td>{{dato}}</td>
-                                            <td class="text-center"><a href="/informacion_coleccion/{{nameDataBase}},{{dato}}" class="btn btn-info"> <i class="fas fa-solid fa-info nav-icon"></i></a></td>
-                                            {% endfor %}   
+                                            <td class="text-center"><a href="#" class="btn btn-info"> <i class="fas fa-solid fa-info nav-icon"></i></a></td>
+                                            {% endfor %}
                                         </tr>     
                                     </tbody>
                                 </table>

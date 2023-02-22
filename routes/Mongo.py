@@ -1,4 +1,4 @@
-from flask import Blueprint,session,redirect, flash
+from flask import Blueprint,session,redirect, flash, jsonify
 import funciones.BasesDatos.funciones_BD as RouteBD
 
 
@@ -28,18 +28,22 @@ def CollectionsBD(key):
         flash("ERROR EN EL SERVIDOR: "+str(e))
         return redirect('/bases-datos')      
 
-@Mongo_routes.route('/informacion_coleccion/<key>')
-def InformacionColeccion(key):
+
+@Mongo_routes.route('/informacion_coleccion/<nameDataBase>,<colection>')
+
+
+def InformacionColeccion(nameDataBase,colection):
+            
     try:
         if "administrador" in session["ROL"]:
-            return RouteBD.CollectionsInfo(key)
+            return RouteBD.datosColeccion(nameDataBase, colection)
         else:
             flash("POR FAVOR INICIA SESION")
             return redirect('/login')
     except Exception as e:
         print("ERROR EN EL SERVIDOR: "+str(e))
         return redirect('/bases-datos')                             
-             
+        
 
 @Mongo_routes.get('/cerrar-sesion')
 def close_session():
