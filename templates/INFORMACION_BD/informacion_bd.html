@@ -16,33 +16,53 @@
         {% include 'INFORMACION_BD/modulos/menu.html' %}
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <div class="container-fluid mt-4">
-                <div class="card card-info">
-                    <div class="card-header">
-                        <h3 class="card-title">BASES DE DATOS EN {{nameDataBase}}</h3>
+
+            <div class="content-header">
+                <div class="container-fluid">
+                  <div class="row mb-2">
+                    <div class="col-sm-6">
+                      <h1 class="m-0">{{nameDataBase}}</h1>
                     </div>
-                    <div class="card-body">
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre de la BD</th>
-                                            <th>Propiedades</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            {% for dato in consulta %}
-                                        <tr>    
-                                            <td>{{dato}}</td>
-                                            <td class="text-center"><a href="/informacion_coleccion/{{nameDataBase}},{{dato}}" class="btn btn-info"> <i class="fas fa-solid fa-info nav-icon"></i></a></td>
-                                            {% endfor %}   
-                                        </tr>     
-                                    </tbody>
-                                </table>
-                            </div>
+                    <style>
+                      #background{
+                          background-color:#6c757d
+                      }
+                   </style>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                      <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">Colecciones</li>
+                      </ol>
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
                 </div>
+                <!-- /.container-fluid -->
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    {% for dato in consulta %}
+                    <div class="col-md-2">
+                        <a href="/informacion_coleccion/{{nameDataBase}},{{dato}}" style="color:black;">
+                            <div class="info-box shadow">
+                                
+                                <span class="info-box-icon bg-light elevation-1"><img class="p-2" src="https://cdn.icon-icons.com/icons2/112/PNG/512/documents_folder_18875.png" alt=""></span>
+                                <div class="info-box-content">
+                                    
+                                <span class="info-box-text">{{dato}}</span>
+                                
+                               
+                                </span>
+                                </div>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}  
+                </div>
+               
+                
             </div>
         </div>
         

@@ -20,10 +20,26 @@ def bdColecctions(key):
         flash("POR FAVOR INICIA SESION")
         return redirect('/login')
 
+def titulosC(coleccion):
+    titulos =[]
+    for dato in coleccion:
+        titulo = list(dato.keys())
+        break
+    return titulo
+
+
 def datosColeccion(nameDataBase, colection):
     consulta = mongoDB.Conexion()[nameDataBase][colection].find()
+    datos =[]
+    titulos= []
+    titulos = titulosC(mongoDB.Conexion()[nameDataBase][colection].find())
+    for dato in consulta:
+        datos.append(list(dato.values()))
+  
+
+
     bd_menu = mongoDB.Conexion().list_database_names()    
-    return render_template('/INFORMACION_BD/informacion_coleccion.html',consulta=consulta,bd_menu=bd_menu)
+    return render_template('/INFORMACION_BD/informacion_coleccion.html',consulta=consulta,bd_menu=bd_menu,titulos = titulos,data=datos)
 
     
     
