@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
+<style>
+    .database{
+        background-color: aquamarine;
+        transition: 0.5s;
+    }
+    .database:hover{
+        background-color:rgb(189, 189, 186);
+    }
+</style>
 {% include 'CPANEL/modulos/header.html' %}
 
 <body class="hold-transition sidebar-mini">
@@ -20,9 +29,9 @@
                 <div class="row">
                     <div class="col-md">
                         <a href="/bases-datos" style="color:black;">
-                            <div class="info-box shadow">
+                            <div class="info-box shadow database">
                                 
-                                <span class="info-box-icon bg-light elevation-1"><img class="p-2" src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_mongo_icon_130383.png" alt=""></span>
+                                <span class="info-box-icon bg-light elevation-1"><img class="p-2" src="{{ url_for('static', filename = 'dist/img/general/ic_db_mongo.png')}}" alt=""></span>
                                 <div class="info-box-content">
                                     
                                 <span class="info-box-text">Mongo DB</span>
