@@ -75,13 +75,57 @@
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <a href="" class="text-danger">Eliminar</a>
+                        <button type="button"
+                        data-toggle="modal"
+                        data-target="#eliminar"
+                        class="btn btn-md text-danger float-sm-start btnOpenEdit">Eliminar</button>
                     </div>
                     
                 </div>
             </div>
         </div>
-        
+        <div class="modal fade" id="eliminar">
+            <div class="modal-dialog modal-md border border-dark">
+              <form
+                class="modal-content"
+                action="/eliminar/coleccion/{{database}},{{coleccion}}"
+                method="get"
+              >
+                <div class="modal-header ">
+                  <h4 class="modal-title text-center">  Eliminar Base de Datos <i class="fa-solid fa-trash nav-icon"></i></h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <p  class="text-center fs-1">Eliminar Base de datos, este movimiento eliminara toda la informacion almacenada en 
+                            Mongo DB, sin afectar a la hoja de datos de Google. </p>
+                     
+                        </div>
+                       </div>
+                    </div>
+                  </div>
+
+                  
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                  <button type="submit" class="btn btn-success">
+                    Confirmar
+                  </button>
+                </div>
+              </form>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
         <!-- /.content-wrapper -->
         {% include 'INFORMACION_BD/modulos/footer.html' %}
         {% include 'INFORMACION_BD/modulos/side-bar-control.html' %}

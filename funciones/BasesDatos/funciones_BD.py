@@ -27,7 +27,12 @@ def titulosC(coleccion):
         break
     return titulo
 
-
+def eliminarColeccion(database,coleccion):
+    try:
+        mongoDB.Conexion()[database][coleccion].drop()
+        return redirect('/bases_colecciones/'+ database)
+    except Exception as e:
+        pass
 def datosColeccion(nameDataBase, colection):
     consulta = mongoDB.Conexion()[nameDataBase][colection].find()
     datos =[]
@@ -37,7 +42,7 @@ def datosColeccion(nameDataBase, colection):
         datos.append(list(dato.values()))
   
     bd_menu = mongoDB.Conexion().list_database_names()    
-    return render_template('/INFORMACION_BD/informacion_coleccion.html',consulta=consulta,bd_menu=bd_menu,titulos = titulos,data=datos)
+    return render_template('/INFORMACION_BD/informacion_coleccion.html',consulta=consulta,bd_menu=bd_menu,titulos = titulos,data=datos,coleccion=colection,database=nameDataBase)
 
     
     

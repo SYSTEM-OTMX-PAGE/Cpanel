@@ -28,10 +28,12 @@ def CollectionsBD(key):
         flash("ERROR EN EL SERVIDOR: "+str(e))
         return redirect('/bases-datos')      
 
+@Mongo_routes.route('/eliminar/coleccion/<database>,<coleccion>')
+def eliminarColeccionBD(database,coleccion):
+    if "administrador" in session["ROL"]:
+        return RouteBD.eliminarColeccion(database,coleccion)
 
 @Mongo_routes.route('/informacion_coleccion/<nameDataBase>,<colection>')
-
-
 def InformacionColeccion(nameDataBase,colection):
             
     try:
