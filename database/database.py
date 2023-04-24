@@ -14,10 +14,9 @@ def ConexionMongo():#AQUI ES DONDE SE GUARDAN LAS CREDENCIALES DE LOS USUARIOS
     return base_datos       
 
 def ConsultaColecciones(key):#MUESTRA LAS COLECCIONES DE LA BD SELECCIONADO POR EL USUARIO
-        base = Conexion()[key]  
-        print("ERROR EN LA BASE DE DATOS")
+        base = Conexion()[key]     
         return base     
-     
+
 def Conexion(): #CONSULTA GENERAL DE BDS
     try:
         client = MongoClient(MONGO_URL, tlsCAfile=ca)

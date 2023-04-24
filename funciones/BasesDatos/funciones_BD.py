@@ -40,25 +40,5 @@ def datosColeccion(nameDataBase, colection):
     titulos = titulosC(mongoDB.Conexion()[nameDataBase][colection].find())
     for dato in consulta:
         datos.append(list(dato.values()))
-  
     bd_menu = mongoDB.Conexion().list_database_names()    
-    return render_template('/INFORMACION_BD/informacion_coleccion.html',consulta=consulta,bd_menu=bd_menu,titulos = titulos,data=datos,coleccion=colection,database=nameDataBase)
-
-    
-    
-
-    
-           
-        
-    
-
-    
-    
-    
-
-
-        
-              
-
-  
-    
+    return render_template('/INFORMACION_BD/informacion_coleccion.html',consulta=consulta,bd_menu=bd_menu,titulos=titulos,data=datos,coleccion=colection,database=nameDataBase)

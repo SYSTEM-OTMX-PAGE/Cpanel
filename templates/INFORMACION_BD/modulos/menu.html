@@ -1,92 +1,256 @@
-<!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href='/cpanel' class="brand-link">
-        
-      <img src="{{ url_for('static', filename = 'dist/img/menu_icons/SYSTEM_menu.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">SYSTEM PANEL</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user (optional) -->
-      <!-- SidebarSearch Form -->
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-header">BASES DE DATOS</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-solid fa-tools nav-icon"></i>
-              <p>
-                Administrar
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/bases_colecciones/" class="nav-link">
-                  <i class="fas fa-solid fa-plus nav-icon"></i>
-                  <p>Nueva Base de datos </p>
-                </a>
-              </li>
-              {% for dato in bd_menu %}
-              <li class="nav-item">
-                <a href="/bases_colecciones/{{dato}}" class="nav-link">
-                  <i class="fas fa-solid fa-database nav-icon"></i>
-                  <p>{{dato}}</p>
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </li>
-         <!--ASISTENCIA-->
-          <li class="nav-header">ROLES</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users fa-solid"></i>
-              <p>
-                Administrar
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-solid fa-info nav-icon"></i>
-                  <p><small>Developing</small></p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+<!--VERSION DEFINITIVA NO AGREGAR SCRIPTS (PODRIA AFECTAR FUNCIONAMIENTO)-->
+<div id="layoutDrawer">
+    <!-- Layout navigation-->
+    <div id="layoutDrawer_nav">
+        <!-- Drawer navigation-->
+        <nav class="drawer accordion drawer-light bg-white" id="drawerAccordion">
+            <div class="drawer-menu">
+                <div class="nav">
+                    <!-- Drawer section heading (Account)-->
+                    <div class="drawer-menu-heading d-sm-none">Cuenta</div>
+                    <!-- Drawer link (Notifications)-->
+                    <a class="nav-link d-sm-none" href="#!">
+                        <div class="nav-link-icon"><i class="material-icons">notifications</i></div>
+                        Notificaciones
+                    </a>
+                    <!-- Drawer link (Messages)-->
+                    <a class="nav-link d-sm-none" href="#!">
+                        <div class="nav-link-icon"><i class="material-icons">mail</i></div>
+                        Mensajes
+                    </a>
+                    <!-- Divider-->
+                    <div class="drawer-menu-divider d-sm-none"></div>
+                    <!-- Drawer section heading (Interface)-->
+                    <div class="drawer-menu-heading">Bases de datos</div>
+                    <!-- Drawer link (Dashboards)-->
+                        </span>
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
+                        <div class="nav-link-icon"><i class="material-icons">storage</i></div>
+                        Colecciones
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Dashboards)-->
+                    <div class="collapse" id="collapseDashboards" aria-labelledby="headingOne"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav">
+                            <a class="nav-link" href="#">NUEVA COLECCIÓN</a>
+                            {% for dato in bases%}
+                            <a class="nav-link" href="/bases_colecciones/{{dato}}">{{dato}}</a>
+                            {% endfor %}
+                        </nav>
+                    </div>
+                    <!-- Drawer link (Layouts)-->
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="nav-link-icon"><i class="material-icons">view_compact</i></div>
+                        Sección 2
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Layouts)-->
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav">
+                            <a class="nav-link" href="#">1</a>
+                            <a class="nav-link" href="#">2</a>
+                            <a class="nav-link" href="#">3</a>
+                        </nav>
+                    </div>
+                    <!-- Drawer link (Pages)-->
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="nav-link-icon"><i class="material-icons">layers</i></div>
+                        Sección 3
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Pages)-->
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav accordion" id="drawerAccordionPages">
+                            <!-- Drawer link (Pages -> Account)-->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseAccount" aria-expanded="false"
+                                aria-controls="pagesCollapseAccount">
+                                Sub-sección
+                                <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                            </a>
+                            <!-- Nested drawer nav (Pages -> Account)-->
+                            <div class="collapse" id="pagesCollapseAccount" aria-labelledby="headingOne"
+                                data-bs-parent="#drawerAccordionPages">
+                                <nav class="drawer-menu-nested nav">
+                                    <a class="nav-link" href="#">1</a>
+                                    <a class="nav-link" href="#">2</a>
+                                    <a class="nav-link" href="#">3</a>
+                                    <a class="nav-link" href="#">4</a>
+                                </nav>
+                            </div>
+                            <!-- Drawer link (Pages -> Authentication)-->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                aria-controls="pagesCollapseAuth">
+                                Sub-sección 2
+                                <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                            </a>
+                            <!-- Nested drawer nav (Pages -> Authentication)-->
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                data-bs-parent="#drawerAccordionPages">
+                                <nav class="drawer-menu-nested nav">
+                                    <a class="nav-link" href="#">1</a>
+                                    <a class="nav-link" href="#">2</a>
+                                    <a class="nav-link" href="#">3</a>
+                                    <a class="nav-link" href="#">4</a>
+                                    <a class="nav-link" href="#">5</a>
+                                </nav>
+                            </div>
+                            <!-- Drawer link (Pages -> Blank Pages)-->
+                            <a class="nav-link" href="app-blank-page.html">1</a>
+                            <!-- Drawer link (Pages -> Error)-->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseError" aria-expanded="false"
+                                aria-controls="pagesCollapseError">
+                                Sub-sección 3
+                                <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                            </a>
+                            <!-- Nested drawer nav (Pages -> Error)-->
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
+                                data-bs-parent="#drawerAccordionPages">
+                                <nav class="drawer-menu-nested nav">
+                                    <a class="nav-link" href="#">1</a>
+                                    <a class="nav-link" href="#">2</a>
+                                    <a class="nav-link" href="#">3</a>
+                                    <a class="nav-link" href="#">4</a>
+                                    <a class="nav-link" href="#">5</a>
+                                    <a class="nav-link" href="#">6</a>
+                                    <a class="nav-link" href="#">7</a>
+                                    <a class="nav-link" href="#">8</a>
+                                </nav>
+                            </div>
+                            <!-- Drawer link (Pages -> Pricing)-->
+                            <a class="nav-link" href="#">2</a>
+                            <!-- Drawer link (Pages -> Knowledgebase)-->
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseKnowledgebase" aria-expanded="false"
+                                aria-controls="pagesCollapseKnowledgebase">
+                                Sub-sección 4
+                                <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                            </a>
+                            <!-- Nested drawer nav (Pages -> Knowledgebase)-->
+                            <div class="collapse" id="pagesCollapseKnowledgebase" aria-labelledby="headingOne"
+                                data-bs-parent="#drawerAccordionPages">
+                                <nav class="drawer-menu-nested nav">
+                                    <a class="nav-link" href="#">1</a>
+                                    <a class="nav-link" href="#">2</a>
+                                    <a class="nav-link" href="#">3</a>
+                                </nav>
+                            </div>
+                            <!-- Drawer link (Pages -> Pricing)-->
+                            <a class="nav-link" href="#">3</a>
+                        </nav>
+                    </div>
+                    <!-- Divider-->
+                    <div class="drawer-menu-divider"></div>
+                    <!-- Drawer section heading (UI Toolkit)-->
+                    <div class="drawer-menu-heading">Herramientas 2</div>
+                    <!-- Drawer link (Components)-->
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
+                        <div class="nav-link-icon"><i class="material-icons">widgets</i></div>
+                        Sección 1
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Components)-->
+                    <div class="collapse" id="collapseComponents" aria-labelledby="headingOne"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav">
+                            <a class="nav-link" href="#">1</a>
+                            <a class="nav-link" href="#">2</a>
+                            <a class="nav-link" href="#">3</a>
+                        </nav>
+                    </div>
+                    <!-- Drawer link (Content)-->
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapseContent" aria-expanded="false" aria-controls="collapseContent">
+                        <div class="nav-link-icon"><i class="material-icons">amp_stories</i></div>
+                        Sección 2
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Content)-->
+                    <div class="collapse" id="collapseContent" aria-labelledby="headingOne"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav">
+                            <a class="nav-link" href="#">1</a>
+                            <a class="nav-link" href="#">2</a>
+                            <a class="nav-link" href="#">3</a>
+                        </nav>
+                    </div>
+                    <!-- Drawer link (Forms)-->
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapseForms" aria-expanded="false" aria-controls="collapseForms">
+                        <div class="nav-link-icon"><i class="material-icons">description</i></div>
+                        Sección 3
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Forms)-->
+                    <div class="collapse" id="collapseForms" aria-labelledby="headingOne"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav">
+                            <a class="nav-link" href="#">1</a>
+                            <a class="nav-link" href="#">2</a>
+                            <a class="nav-link" href="#">3</a>
+                        </nav>
+                    </div>
+                    <!-- Drawer link (Utilities)-->
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                        data-bs-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
+                        <div class="nav-link-icon"><i class="material-icons">build</i></div>
+                        Sección 4
+                        <div class="drawer-collapse-arrow"><i class="material-icons">expand_more</i></div>
+                    </a>
+                    <!-- Nested drawer nav (Utilities)-->
+                    <div class="collapse" id="collapseUtilities" aria-labelledby="headingOne"
+                        data-bs-parent="#drawerAccordion">
+                        <nav class="drawer-menu-nested nav">
+                            <a class="nav-link" href="#">1</a>
+                            <a class="nav-link" href="#">2</a>
+                            <a class="nav-link" href="#">3</a>
+                        </nav>
+                    </div>
+                    <!-- Divider-->
+                    <div class="drawer-menu-divider"></div>
+                    <!-- Drawer section heading (Plugins)-->
+                    <div class="drawer-menu-heading">Herramientas 3</div>
+                    <!-- Drawer link (Charts)-->
+                    <a class="nav-link" href="#">
+                        <div class="nav-link-icon"><i class="material-icons">bar_chart</i></div>
+                        1
+                    </a>
+                    <!-- Drawer link (Code Blocks)-->
+                    <a class="nav-link" href="#">
+                        <div class="nav-link-icon"><i class="material-icons">code</i></div>
+                        2
+                    </a>
+                    <!-- Drawer link (Data Tables)-->
+                    <a class="nav-link" href="#">
+                        <div class="nav-link-icon"><i class="material-icons">filter_alt</i></div>
+                        3
+                    </a>
+                    <!-- Drawer link (Date Picker)-->
+                    <a class="nav-link" href="#">
+                        <div class="nav-link-icon"><i class="material-icons">date_range</i></div>
+                        4
+                    </a>
+                </div>
+            </div>
+            <!-- Drawer footer        -->
+            <div class="drawer-footer border-top">
+                <div class="d-flex align-items-center">
+                    <i class="material-icons text-muted">account_circle</i>
+                    <div class="ms-3">
+                        <div class="caption">En sesión:</div>
+                        <div class="small fw-500">{{session['USER']}}</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <!-- /.sidebar -->
-  </aside>
-
-<script>
-  $('.toastsDefaultWarning').click(function() {
-      $(document).Toasts('create', {
-        class: 'bg-warning',
-        title: 'Toast Title',
-        subtitle: 'Subtitle',
-        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-
-    $('.toastrDefaultError').click(function() {
-      toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-    });
-
-    $('.swalDefaultWarning').click(function() {
-      Toast.fire({
-        icon: 'warning',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-</script>
+</div>

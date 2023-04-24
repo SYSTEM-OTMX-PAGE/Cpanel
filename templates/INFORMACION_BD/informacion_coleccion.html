@@ -1,139 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
-{% include 'INFORMACION_BD/modulos/header.html' %}
+{% include 'MODULOS_GENERALES/header.html' %}
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
-                alt="LOGO" height="60" width="60" />
-            <p>SYSTEM PANEL</p>
-        </div>
-        <!-- Navbar -->
-        {% include 'INFORMACION_BD/modulos/nav-bar.html' %}
-        <!-- /.navbar -->
-        {% include 'INFORMACION_BD/modulos/menu.html' %}
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+<body class="nav-fixed bg-light">
+    <!--Navbar-->
+    {% include 'MODULOS_GENERALES/nav-bar.html' %}
+    <!-- /.navbar -->
 
+    <!--Menu (sidebar)-->
+    {% include 'BD/modulos/menu.html' %}
 
-            <div class="content-header">
-                <div class="container-fluid">
-                  <div class="row mb-2">
-                    <div class="col-sm-6">
-                      <h1 class="m-0">Datos de la coleccion</h1>
-                    </div>
-                    <style>
-                      #background{
-                          background-color:#6c757d
-                      }
-                   </style>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Colecciones</li>
-                      </ol>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-
-            <div class="container-fluid mt-4">
-                <div class="card shadow">
-                    
-                    <div class="card-body">
-                           
-                                <table class="table table-bordered table-striped" id="example1">
-                                    <thead>
-                                        <tr>
-                                            {% for titulo in titulos %}
-                                            <th>{{titulo}}</th>
-                                            {% endfor %}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for fila in data %}
-                                        {% if fila[1] %}
-                                        <tr>
-                                            {%for dato in fila %}
-                                                <td>{{dato}}</td>
-                                            {% endfor %}
-                                        </tr>
-
-                                        {% endif %}
-                                            
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <button type="button"
-                        data-toggle="modal"
-                        data-target="#eliminar"
-                        class="btn btn-md text-danger float-sm-start btnOpenEdit">Eliminar</button>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="eliminar">
-            <div class="modal-dialog modal-md border border-dark">
-              <form
-                class="modal-content"
-                action="/eliminar/coleccion/{{database}},{{coleccion}}"
-                method="get"
-              >
-                <div class="modal-header ">
-                  <h4 class="modal-title text-center">  Eliminar Base de Datos <i class="fa-solid fa-trash nav-icon"></i></h4>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <p  class="text-center fs-1">Eliminar Base de datos, este movimiento eliminara toda la informacion almacenada en 
-                            Mongo DB, sin afectar a la hoja de datos de Google. </p>
-                     
+    <!-- Layout wrapper-->
+    <div id="layoutDrawer">
+        <!-- Layout content-->
+        <div id="layoutDrawer_content">
+            <!-- Main page content-->
+            <main>
+                <div class="container-xl p-5">
+                    <div id="scrollTarget"></div>
+                    <div class="card card-raised">
+                        <div class="card-header bg-transparent px-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="me-4">
+                                    <h2 class="card-title mb-0">Datos de la colección: {{coleccion}}</h2>
+                                    <div class="card-subtitle">Detalles e historial</div>
+                                </div>
+                            </div>
                         </div>
-                       </div>
+                        <div class="card-body p-4">
+                            <!-- Simple DataTables example-->
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        {% for titulo in titulos %}
+                                        <th>{{titulo}}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    {% for fila in data %}
+                                    {% if fila[1] %}
+                                    <tr>
+                                        {% for dato in fila %}
+                                        <td>{{dato}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
-
-                  
+                    
                 </div>
-                <div class="modal-footer justify-content-between">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-dismiss="modal"
-                  >
-                    Cancelar
-                  </button>
-                  <button type="submit" class="btn btn-success">
-                    Confirmar
-                  </button>
-                </div>
-              </form>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-        <!-- /.content-wrapper -->
-        {% include 'INFORMACION_BD/modulos/footer.html' %}
-        {% include 'INFORMACION_BD/modulos/side-bar-control.html' %}
+            </main>
+            <!--Footer-->
+    {% include 'MODULOS_GENERALES/footer.html' %}
+        </div>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
+    <!--scripts-->
     {% include 'INFORMACION_BD/modulos/scripts.html' %}
-    <!--Libreria chart-->
 </body>
-
 </html>

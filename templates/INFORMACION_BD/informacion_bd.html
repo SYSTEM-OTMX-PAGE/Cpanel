@@ -1,154 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
-<style>
-    .coleccion-bd{
-        background-color: #fff;
-        transition: 0.5s;
-    }
-    .coleccion-bd:hover{
-        background-color:rgb(189, 189, 186);
-    }
-    
-</style>
-{% include 'INFORMACION_BD/modulos/header.html' %}
+{% include 'MODULOS_GENERALES/header.html' %}
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
-                alt="LOGO" height="60" width="60" />
-            <p>SYSTEM PANEL</p>
-        </div>
-        <!-- Navbar -->
-        {% include 'INFORMACION_BD/modulos/nav-bar.html' %}
-        <!-- /.navbar -->
-        {% include 'INFORMACION_BD/modulos/menu.html' %}
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+<body class="nav-fixed bg-light">
+    <!--Navbar-->
+    {% include 'MODULOS_GENERALES/nav-bar.html' %}
+    <!-- /.navbar -->
 
-            <div class="content-header">
-                <div class="container-fluid">
-                  <div class="row mb-2">
-                    <div class="col-sm-6">
-                      <h1 class="m-0">{{nameDataBase}}</h1>
-                    </div>
-                    <style>
-                      #background{
-                          background-color:#6c757d
-                      }
-                   </style>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Colecciones</li>
-                      </ol>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-            <div class="container-fluid">
-                
-               
-                <div class="col-12 ">
-                    <div class="card card-dark rounded shadow card-outline card-outline-tabs">
-                    <div class="card-header p-0 border-bottom-0">
-                    <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                    <li class="nav-item">
-                    <a class="nav-link active text-dark" id="custom-tabs-four-home-tab" data-toggle="pill" href="#colecciones" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Colecciones</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-dark" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#exportar" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Exportar</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-dark" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#importar" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Importar</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-dark" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#new_colection" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">Nueva Coleccion</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                        Mas Opciones <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; transform: translate3d(-5px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item text-danger" tabindex="-1" href="#">Eliminar</a>
-                        </div>
-                        </li>
-                    </ul>
-                    </div>
-                    <div class="card-body">
-                    <div class="tab-content" id="custom-tabs-four-tabContent">
-                    <div class="tab-pane fade active show" id="colecciones" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                        <div class="row">
-                            {% for dato in consulta %}
-                            <div class="col-md-4 ">
-                                <a href="/informacion_coleccion/{{nameDataBase}},{{dato}}" style="color:black;">
-                                    <div class="info-box coleccion-bd shadow-none">
-                                        <span class="info-box-icon bg-light "><img class="img-fluid"  src="{{ url_for('static', filename = 'dist/img/general/ic_colection.png')}}" alt=""></span>
-                                        <div class="info-box-content">
-                                        <span class="info-box-text text-sm">{{dato}}</span>
-                                        </span>
-                                        </div>                            
+    <!--Menu (sidebar)-->
+    {% include 'BD/modulos/menu.html' %}
+
+    <!-- Layout wrapper-->
+    <div id="layoutDrawer">
+        <!-- Layout content-->
+        <div id="layoutDrawer_content">
+            <!-- Main page content-->
+            <main>
+                <div class="container-xl p-5">
+                    <div id="scrollTarget"></div>
+                    <div id="nav-tab-bar">
+                        <h2 class="mb-4">{{nameDataBase}}</h2>
+                        <mwc-tab-bar class="nav nav-tabs" role="tablist">
+                            <mwc-tab class="active" label="Colecciones" data-bs-toggle="tab" role="tab"
+                                aria-selected="true" id="colecciones" data-bs-target="#materialTabBarDemo"
+                                aria-controls="materialTabBarDemo"></mwc-tab>
+                            <mwc-tab label="Exportar" data-bs-toggle="tab" role="tab" aria-selected="false"
+                                id="Exportar" data-bs-target="#materialTabBarHtml"
+                                aria-controls="materialTabBarHtml"></mwc-tab>
+                            <mwc-tab label="Importar" data-bs-toggle="tab" data-bs-target="#materialTabBarPug"
+                                role="tab" aria-controls="materialTabBarPug" aria-selected="false"
+                                id="Importar"></mwc-tab>
+                            <mwc-tab label="Nueva colección" data-bs-toggle="tab" data-bs-target="#materialTabBarPug"
+                                role="tab" aria-controls="materialTabBarPug" aria-selected="false"
+                                id="nuevaColeccion"></mwc-tab>
+                            <mwc-tab label="Más opciones" data-bs-toggle="tab" data-bs-target="#materialTabBarPug"
+                                role="tab" aria-controls="materialTabBarPug" aria-selected="false"
+                                id="masOpciones"></mwc-tab>
+                        </mwc-tab-bar>
+                        <div class="tab-content mb-5">
+                            <div class="tab-pane show active" role="tabpanel" id="materialTabBarDemo"
+                                aria-labelledby="materialTabBarDemoTab">
+                                <div class="border border-top-0 p-3 p-sm-5 bg-light">
+                                    <div class="row">
+                                        {% for dato in consulta %}
+                                        <div class="col-md-4">
+                                            <a href="/informacion_coleccion/{{nameDataBase}},{{dato}}"
+                                                style="color:black; text-decoration: none;">
+                                                <div class="btn-example w-100 text-left">
+                                                    <button class="btn btn-raised-primary btn-icon rounded"><i
+                                                            class="material-icons">source</i></button> <span> {{dato}}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
                                     </div>
-                                </a>
+                                </div>
                             </div>
-                            {% endfor %}  
+                            <div class="tab-pane" role="tabpanel" id="materialTabBarHtml"
+                                aria-labelledby="materialTabBarHtmlTab">
+                                <div class="d-flex justify-content-start border border-top-0 bg-light p-3 p-sm-4">
+                                    <pre class="language-html m-0">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum facere minima ducimus nulla, porro reprehenderit in eius nemo animi, quae minus laborum iure consectetur sapiente deserunt voluptates vel! Laboriosam, recusandae!</p>
+                                    </pre>
+                                </div>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="materialTabBarPug"
+                                aria-labelledby="materialTabBarPugTab">
+                                <div class="d-flex justify-content-start border border-top-0 bg-light p-3 p-sm-4">
+                                    <pre class="language-pug m-0">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At numquam consectetur voluptas impedit, eaque aliquid pariatur beatae hic neque! Corporis reiciendis tenetur ipsum minima, nostrum esse non debitis et maiores?</p>
+                                    </pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="exportar" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                    Exportar
-                    </div>
-                    <div class="tab-pane fade" id="importar" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
-                    Importar</div>
-                    <div class="tab-pane fade" id="new_colection" role="tabpanel" aria-labelledby="custom-tabs-four-settings-tab">
-                    <h1>Nueva Coleccion</h1>
-                    <hr>
-                    <div class="row">
-                        <div class="col">
-                        
-                        <div class="form-group">
-                        <label>Nombre de la coleccion</label>
-                        <input type="text" class="form-control" placeholder="Nombre">
-                        </div>
-                        </div>
-                        
-                       
-                    </div>
-                        <div class="row">
-                            <div class="col">
-                            
-                            <div class="form-group">
-                            <label>Coleccion</label>
-                            <textarea class="form-control" rows="3" placeholder="{'':''}"></textarea>
-                            </div>
-                            </div>
-                            
-                            </div>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    </div>
-                    </div>
-                
-            </div>
-
-
-
-            
+                </div>
+            </main>
+            <!--Footer-->
+        {% include 'MODULOS_GENERALES/footer.html' %}
         </div>
-        
-        <!-- /.content-wrapper -->
-        {% include 'INFORMACION_BD/modulos/footer.html' %}
-        {% include 'INFORMACION_BD/modulos/side-bar-control.html' %}
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    {% include 'INFORMACION_BD/modulos/scripts.html' %}
-    <!--Libreria chart-->
+
+    <!--scripts-->
+    {% include 'BD/modulos/scripts.html' %}
 </body>
 
 </html>

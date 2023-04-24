@@ -1,62 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
-<style>
-    .database{
-        background-color: aquamarine;
-        transition: 0.5s;
-    }
-    .database:hover{
-        background-color:rgb(189, 189, 186);
-    }
-</style>
-{% include 'CPANEL/modulos/header.html' %}
+{% include 'MODULOS_GENERALES/header.html' %}
+<body class="nav-fixed bg-light">
+    <!--Navbar-->
+    {% include 'MODULOS_GENERALES/nav-bar.html' %}
+    <!-- /.navbar -->
+    
+    <!--Menu (sidebar)-->
+    {% include 'MODULOS_GENERALES/menu.html' %}
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
-                alt="LOGO" height="60" width="60" />
-            <p>SYSTEM PANEL</p>
-        </div>
-        <!-- Navbar -->
-        {% include 'CPANEL/modulos/nav-bar.html' %}
-        <!-- /.navbar -->
-        {% include 'CPANEL/modulos/menu.html' %}
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <div class="container-fluid mt-4">
-                <div class="row">
-                    <div class="col-md">
-                        <a href="/bases-datos" style="color:black;">
-                            <div class="info-box shadow database">
-                                
-                                <span class="info-box-icon bg-light elevation-1"><img class="p-2" src="{{ url_for('static', filename = 'dist/img/general/ic_db_mongo.png')}}" alt=""></span>
-                                <div class="info-box-content">
+    <!-- Layout wrapper-->
+    <div id="layoutDrawer">
+        <!-- Layout content-->
+        <div id="layoutDrawer_content">
+            <!-- Main page content-->
+            <main>
+                <!-- Page header-->
+                <header class="masthead bg-dark">
+                    <div class="container-xl px-5">
+                        <div class="row justify-content-center gx-5">
+                            <div class="col-md-8 col-lg-6">
+                                <div class="text-center py-10">
+                                    <!-- Example brand image (inline SVG image)-->
+                                    <svg class="mb-3" viewBox="0 0 527 527" style="enable-background: new 0 0 527 527; height: 2.5rem; width: 2.5rem" xml:space="preserve">
+                                        <style type="text/css">
+                                            .st0 {
+                                                fill: none;
+                                                stroke: currentColor;
+                                                stroke-width: 15;
+                                                stroke-miterlimit: 10;
+                                                enable-background: new;
+                                            }
+                                        </style>
+                                        <img class="img-fluid" src="{{url_for('static', filename = 'dist/assets/img/SYSTEM-OTMX.png')}}" alt="SYSTEM" width="80">
+                                    </svg>
+                                    <!-- Masthead content-->
+                                    <h1 class="masthead-heading mb-3 display-5">Bienvenido a SYSTEM-CPANEL</h1>
+                                    <p>SYSTEM-CPANEL es una herramienta desarrollada por SYSTEM-OTMX para administrar diversas herramientas en un solo sitio.</p>
                                     
-                                <span class="info-box-text">Mongo DB</span>
-                                
-                               
-                                </span>
                                 </div>
-                                
                             </div>
-                        </a>
-                            
-                        
+                        </div>
+                    </div>
+                </header>
+                <div class="container-xl p-5">
+                    <div id="scrollTarget"></div>
+                    <!-- Dashboard demos-->
+                    <h2 class="display-6 mb-0">Bases de datos</h2>
+                    <p class="small text-muted">En este apartado podras administrar tus gestores de bases de datos</p>
+                    <hr class="mb-5 mt-0" />
+                    <div class="row gx-5">
+                        <div class="col-sm-6 col-lg-4 mb-5">
+                            <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="/bases-datos"><img class="img-fluid" src="{{url_for('static', filename = 'dist/assets/img/Home/Mongo.jpg')}}" alt="MongoDB"/></a>
+                            <div class="small font-monospace text-center">Mongo DB</div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 mb-5">
+                            <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="https://www.phpmyadmin.net" target="_blank"><img class="img-fluid" src="{{url_for('static', filename = 'dist/assets/img/Home/php.jpg')}}" alt="phpMyAdmin"/></a>
+                            <div class="small font-monospace text-center">phpMyAdmin</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
+            <!--Footer-->
+    {% include 'MODULOS_GENERALES/footer.html' %}
         </div>
-
-        <!-- /.content-wrapper -->
-        {% include 'CPANEL/modulos/footer.html' %}
-        {% include 'CPANEL/modulos/side-bar-control.html' %}
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    {% include 'CPANEL/modulos/scripts.html' %}
-    <!--Libreria chart-->
+    <!--scripts-->
+    {% include 'MODULOS_GENERALES/scripts.html' %}
 </body>
-
 </html>

@@ -1,121 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
-{% include 'PERFIL/modulos/header.html' %}
+{% include 'MODULOS_GENERALES/header.html' %}
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
-                alt="LOGO" height="60" width="60" />
-            <p>SYSTEM PANEL</p>
-        </div>
-        <!-- Navbar -->
-        {% include 'PERFIL/modulos/nav-bar.html' %}
-        <!-- /.navbar -->
-        {% include 'PERFIL/modulos/menu.html' %}
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <section class="container-fluid mt-4">
-                <div class="card card-primary card-outline">
-                    <div class="card-body box-profile">
-                        <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle"
-                                src="{{ url_for('static', filename = 'dist/img/menu_icons/SYSTEM_menu.png') }}"
-                                alt="user profile image">
-                            <h3 class="profile-username text-center"></h3>
-                            <p class="text-center">{{session['USER']}}</p>
-                            <p class="text-center">administrador</p>
-                        </div>
-                        <div class="card card-info card-outline">
-                            <div class="card-body">
-                                <div class="row">
-                                    <h4 class="title-h4">Cambiar contraseña</h4>
-                                    <div class="form-group"></div>
-                                </div>
-                                <!--formulario del cambio de contraseña-->
-                                <form class="row"
-                                    action="{{url_for('Perfil_routes.UpdatePassword',key=admin.email, campo='password')}}"
-                                    method="post">
-                                    {% with messages = get_flashed_messages() %} {% if messages %} {% for
-                                        message in messages %}
-                                        <script>
-                                          Swal.fire({
-                                            position: "top-end",
-                                            icon: "warning",
-                                            title: "{{message}}",
-                                            showConfirmButton: false,
-                                            timer: 4000,
-                                          });
-                                        </script>
-                                        {% endfor %} {% endif %} {% endwith %}
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                           <label>Nueva contraseña</label>
-                                           <input type="password" name="password" class="form-control" placeholder="Contraseña"> 
-                                        </div>
-                                        <div class="form-group text-center">
-                                            <label class="label">
-                                                <i class="fas fa-solid text-center fa-exclamation"></i>
-                                            </label><br>
-                                            <button type="submit" class="btn btn-success">Confirmar</button>
-                                        </div>
-                                    </div>   
-                                </form>
-                                <div class="row">
-                                    <h4 class="title-h4">Sistema de ayuda al administrador</h4>
-                                </div>
-                                <!--formulario de problemas del panel-->
-                                <form class="row">
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="label">Asunto</label>
-                                                    <input type="text" name="asunto" class="form-control" placeholder="Asunto">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="label">Detalles del problema</label>
-                                                    <textarea class="form-control" name="detalles" rows="4" placeholder="Detalle aquí su problema"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 text-center">
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        </div>
+<body class="nav-fixed bg-light">
+    <!--Navbar-->
+    {% include 'MODULOS_GENERALES/nav-bar.html' %}
+    <!-- /.navbar -->
+
+    <!--Menu (sidebar)-->
+    {% include 'MODULOS_GENERALES/menu.html' %}
+
+    <!-- Layout wrapper-->
+    <div id="layoutDrawer">
+        <!-- Layout content-->
+        <div id="layoutDrawer_content">
+            <!-- Main page content-->
+            <main>
+                <div class="container-xl p-5">
+                    <div id="scrollTarget"></div>
+                    <div class="row gx-5">
+                        <div class="col-xl-4">
+                            <!-- Profile picture card-->
+                            <div class="card card-raised mb-5">
+                                <div class="card-body p-5">
+                                    <div class="card-title">{{admin.nombre}}</div>
+                                    <div class="card-subtitle mb-4">{{session['USER']}}</div>
+                                    <div class="text-center">
+                                        <!-- Profile picture image-->
+                                        <img class="img-fluid rounded-circle mb-1"
+                                            src="{{url_for('static', filename = 'dist/assets/img/perfil.png')}}"
+                                            alt="USER-PROFILE" style="max-width: 150px; max-height: 150px" />
+                                        <!-- Profile picture help block-->
+                                        <div class="caption fst-italic text-muted mb-4">Solo formato JPG NO MAYORES A 2
+                                            MB</div>
+                                        <!-- Profile picture upload button-->
+                                        <button class="btn btn-primary" type="button">
+                                            Cambiar foto de perfil
+                                            <i class="material-icons trailing-icon">upload</i>
+                                        </button>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="alert alert-warning shadow" role="alert">
-                                            <h3 class="alert-heading">
-                                                <i class="fas fa-solid fa-user">¡Sistema de ayuda al administrador!</i>
-                                            </h3>
-                                            <p>Hola muchas gracias por usar SYSTEM-PANEL by <strong>SYSTEM-OTMX</strong>;
-                                            Si presentas algun problema con el sistema, por favor envia un mensaje con el asunto y detalles del problema.
-                                            Trata de ser lo mas especifico posible por favor.
-                                            </p>
-                                            <hr>
-                                            <p>En caso de que no recibas respuesta por favor manda un correo a: system.otmx@gmail.com</p>
-                                        </div>
-                                    </div> 
-                                </form>
+                                </div>
                             </div>
                         </div>
-            </section>
-        </div>
+                        <div class="col-xl-8">
+                            <!-- Account details card-->
+                            <div class="card card-raised mb-5">
+                                <div class="card-body p-5">
+                                    <div class="card-title">Configuracion de la cuenta</div>
+                                    <div class="card-subtitle mb-4">Revisa la informacion / actualiza la informacion de
+                                        ser necesario</div>
+                                    <form action="{{url_for('Perfil_routes.UpdatePassword',key=admin.email, campo='password')}}" method="post">
+                                        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+                                        message in messages %}
+                                        <script>
+                                            Swal.fire({
+                                                position: "top-end",
+                                                icon: "warning",
+                                                title: "{{message}}",
+                                                showConfirmButton: false,
+                                                timer: 4000,
+                                            });
+                                        </script>
+                                        {% endfor %} {% endif %} {% endwith %}
+                                        <!-- Form Group (datos del la cuenta)-->
+                                        <div class="mb-4"><mwc-textfield class="w-100" label="Correo" type="email"
+                                                outlined value="{{admin.email}}" disabled></mwc-textfield></div>
+                                        <!-- Form Row-->
+                                        <div class="row mb-4">
+                                            <!-- Form Group (nombre)-->
+                                            <div class="col-md-6"><mwc-textfield class="w-100" label="Nombre"
+                                                    name="nombre" type="text" outlined
+                                                    value="{{admin.nombre}}"></mwc-textfield></div>
+                                            <!-- Form Group (password)-->
+                                            <div class="col-md-6"><mwc-textfield class="w-100" label="Contraseña"
+                                                    name="password" type="password" outlined
+                                                    value="1234567890"></mwc-textfield></div>
+                                        </div>
+                                        <!-- Form Row-->
+                                        <div class="row mb-4">
+                                            <!-- Form Group (telefono)-->
+                                            <div class="col-md-6"><mwc-textfield class="w-100"
+                                                    label="Numero de telefono" name="telefono" outlined type="tel"
+                                                    value="{{admin.telefono}}"></mwc-textfield></div>
+                                            <!-- Form Group (fecha de nacimiento)-->
+                                            <div class="col-md-6">
+                                                <div class="col-md-6"><mwc-textfield class="w-100"
+                                                        label="Fecha de cumpleaños" name="cumple" outlined type="text"
+                                                        value="{{admin.cumple}}"></mwc-textfield></div>
+                                            </div>
+                                        </div>
+                                        <!-- boton de guardar cambios-->
+                                        <div class="text-end"><button class="btn btn-primary" type="submit">Guardar
+                                                cambios</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
 
-        <!-- /.content-wrapper -->
-        {% include 'PERFIL/modulos/footer.html' %}
-        {% include 'PERFIL/modulos/side-bar-control.html' %}
+            <!--Footer-->
+            {% include 'MODULOS_GENERALES/footer.html' %}
+        </div>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    {% include 'PERFIL/modulos/scripts.html' %}
-    <!--Libreria chart-->
+    <!--scripts-->
+    {% include 'MODULOS_GENERALES/scripts.html' %}
+    <!--sweetAlert2-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
 </body>
 
 </html>

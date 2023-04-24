@@ -1,52 +1,72 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}">
   {% include 'LOGIN/modulos/header.html' %}
 </head>
 
-<body>
-  <section class="vh-100">
-    <div class="container py-5 h-100">
-      <div class="row d-flex align-items-center justify-content-center h-100">
-        <div class="col-md-8 col-lg-7 col-xl-6">
-          <img src="{{ url_for('static',filename='dist/img/login/cpanel.svg')}}" class="img-fluid" alt="login">
-        </div>
-        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form action="/login" method="post"><h1 class="text-center">SYSTEM-PANEL</h1>
-            {% with messages = get_flashed_messages() %} {% if messages %} {% for
-            message in messages %}
-            <script>
-              Swal.fire({
-                position: "top-end",
-                icon: "warning",
-                title: "{{message}}",
-                showConfirmButton: false,
-                timer: 4000,
-              });
-            </script>
-            {% endfor %} {% endif %} {% endwith %}
-            <!-- correo input -->
-            <div class="form-outline mb-4">
-              <label class="form-label">Correo</label>
-              <input type="email" name="email" class="form-control form-control-lg rounded-pill input" />
-            </div>
-
-            <!-- contraseña input -->
-            <div class="form-outline mb-4">
-              <label class="form-label">Contraseña</label>
-              <input type="password" name="password" class="form-control form-control-lg rounded-pill input" />
-            </div>
-
-            <!-- Submit button -->
-            <input type="submit" class="btn btn-dark btn-lg btn-block rounded-pill" value="Iniciar sesion">
-          </form>
-        </div>
+<body class="bg-pattern-waihou">
+  <!-- Layout wrapper-->
+  <div id="layoutAuthentication">
+      <!-- Layout content-->
+      <div id="layoutAuthentication_content">
+          <!-- Main page content-->
+          <main>
+              <!-- Main content container-->
+              <div class="container">
+                  <div class="row justify-content-center">
+                      <div class="col-xxl-10 col-xl-10 col-lg-12">
+                          <div class="card card-raised shadow-10 mt-5 mt-xl-10 mb-4">
+                              <div class="row g-0">
+                                  <div class="col-lg-5 col-md-6">
+                                      <div class="card-body p-5">
+                                          <!-- Auth header with logo image-->
+                                          <div class="text-center">
+                                              <img class="mb-3" src="{{url_for('static', filename = 'dist/assets/img/login/SYSTEM_login.png')}}" alt="System_login" style="height: 70px" />
+                                              <h1 class="display-5 mb-0">CPANEL</h1>
+                                              <div class="subheading-1 mb-5">SYSTEM-OTMX</div>
+                                          </div>
+                                          <!-- Login submission form-->
+                                          <form class="mb-5" action="/login" method="post">
+                                            {% with messages = get_flashed_messages() %} {% if messages %} {% for
+                                              message in messages %}
+                                              <script>
+                                                Swal.fire({
+                                                  position: "top-end",
+                                                  icon: "warning",
+                                                  title: "{{message}}",
+                                                  showConfirmButton: false,
+                                                  timer: 4000,
+                                                });
+                                              </script>
+                                              {% endfor %} {% endif %} {% endwith %}
+                                              <div class="mb-4">
+                                                <mwc-textfield class="w-100" label="Correo" type="email" name="email" outlined></mwc-textfield>
+                                              </div>
+                                              <div class="mb-4">
+                                                <mwc-textfield class="w-100" label="Contraseña" outlined icontrailing="visibility_off" type="password" name="password"></mwc-textfield>
+                                              </div>
+                                              <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                  <input type="submit" class="btn btn-dark" value="Iniciar sesión">
+                                              </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <!-- Background image column using inline CSS-->
+                                  <div class="col-lg-7 col-md-6 d-none d-md-block" style="background-image: url('https://cdn.pixabay.com/photo/2018/01/20/07/19/tallest-3093955_1280.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </main>
       </div>
-    </div>
-  </section>
-  {% include 'LOGIN/modulos/scripts.html' %}
+  </div>
+  <!-- Load Bootstrap JS bundle-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <!-- Load global scripts-->
+  <script type="module" src="{{url_for('static', filename = 'dist/js/material.js')}}"></script>
+  <script src=" {{url_for('static', filename = 'dist/js/scripts.js')}}"></script>
 </body>
 
 </html>

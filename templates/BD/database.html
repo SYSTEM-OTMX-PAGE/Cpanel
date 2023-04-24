@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='dist/img/general/SYSTEM-OTMX.png')}}" />
-{% include 'BD/modulos/header.html' %}
+{% include 'MODULOS_GENERALES/header.html' %}
+<body class="nav-fixed bg-light">
+    <!--Navbar-->
+    {% include 'MODULOS_GENERALES/nav-bar.html' %}
+    <!-- /.navbar -->
+    
+    <!--Menu (sidebar)-->
+    {% include 'BD/modulos/menu.html' %}
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}"
-                alt="LOGO" height="60" width="60" />
-            <p>SYSTEM PANEL</p>
-        </div>
-        <!-- Navbar -->
-        {% include 'BD/modulos/nav-bar.html' %}
-        <!-- /.navbar -->
-        {% include 'BD/modulos/menu.html' %}
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <div class="container-fluid mt-4">
-                <div class="card card-success">
-                    <div class="card-header">
-                        <h3 class="card-title">BASES DE DATOS EN MONGODB</h3>
-                    </div>
-                    <div class="card-body">
-                        <span class="h5"><strong>Acerca de las bases de datos en MongoBD</strong> <i class="fas fa-sold fa-leaf"></i></span> 
-                        <div class="card-body">
-                            <p>Bienvenido al administrador de base de datos para <strong>Mongo BD</strong> aqui podra consultar las bases de datos 
-                            que tiene disponibles, ademas de tener la posibilidad de crear nuevas colecciones, nuevas bases, y modificar sus parametros
-                            de acuerdo a sus necesidades... Recuerde <strong>TENER CUIDADO</strong> ya que toda acciones que ejecute se hara en tiempo real
-                            y no hay manera de recuperar los datos en caso de ser borrados.<br>                            
-                            <strong>GRACIAS POR USAR SYSTEM-PANEL</strong></p>
-                            <br>
-                            <div class="text-center p-1" >
-                                <img src="{{ url_for('static', filename = 'dist/img/general/loader.png')}}" width="200px" height="200px" >
+    <!-- Layout wrapper-->
+    <div id="layoutDrawer">
+        <!-- Layout content-->
+        <div id="layoutDrawer_content">
+            <!-- Main page content-->
+            <main>
+                <!-- Page header-->
+                <header class="masthead bg-dark">
+                    <div class="container-xl px-5">
+                        <div class="row justify-content-center gx-5">
+                            <div class="col-md-8 col-lg-6">
+                                <div class="text-center py-10">
+                                    <!-- Example brand image (inline SVG image)-->
+                                    <svg class="mb-3" viewBox="0 0 527 527" style="enable-background: new 0 0 527 527; height: 2.5rem; width: 2.5rem" xml:space="preserve">
+                                        <style type="text/css">
+                                            .st0 {
+                                                fill: none;
+                                                stroke: currentColor;
+                                                stroke-width: 15;
+                                                stroke-miterlimit: 10;
+                                                enable-background: new;
+                                            }
+                                        </style>
+                                        <img class="img-fluid" src="{{url_for('static', filename = 'dist/assets/img/SYSTEM-OTMX.png')}}" alt="SYSTEM" width="80">
+                                    </svg>
+                                    <!-- Masthead content-->
+                                    <h1 class="masthead-heading mb-3 display-5">BASE DE DATOS EN MONGO DB</h1>
+                                    <p> Bienvenido al administrador de gesto de base de datos para <strong>Mongo DB</strong>, aqui podra consultar las bases de datos que tienes
+                                        disponibles, ademas de tener la posibilidad  de crear nuevas colecciones, modificar sus parametros de acuerdo a sus necesidades.
+                                        RECUERDE <strong>TENER CUIDADO</strong> ya que toda acción que ejecute se realizara en tiempo REAL.
+
+                                    </p>
+                                    
+                                </div>
                             </div>
-                            
-                        </div>   
+                        </div>
                     </div>
-                    <!-- /.card-body -->
+                </header>
+                <div class="container-xl p-5">
+                    <div id="scrollTarget"></div>
                 </div>
-            </div>
+            </main>
+            <!--Footer-->
+    {% include 'BD/modulos/footer.html' %}
         </div>
-     
-        <!-- /.content-wrapper -->
-        {% include 'BD/modulos/footer.html' %}
-        {% include 'BD/modulos/side-bar-control.html' %}
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
+    
+    <!--scripts-->
     {% include 'BD/modulos/scripts.html' %}
-    <!--Libreria chart-->
 </body>
-
 </html>
